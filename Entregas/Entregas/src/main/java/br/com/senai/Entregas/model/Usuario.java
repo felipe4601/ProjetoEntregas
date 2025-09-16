@@ -33,7 +33,16 @@ public class Usuario {
     private String senha;
 
 
-    private Integer idTipoUsuario;
+    // Mapear relacionamentos
+    // Muitos usuários para um tipo usuário
+    // FetchType - Carrega os dados juntos
+    // optional - Se é obrigatório ou não
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    // Avisar para o java, qual coluna da tabela tipu_suário vou relacionar
+    @JoinColumn(name = "tipo_usuario_id")
+    private TipoUsuario tipoUsuario;
+
+
 
 
 }
