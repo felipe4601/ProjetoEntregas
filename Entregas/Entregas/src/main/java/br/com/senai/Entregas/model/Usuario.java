@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 // Anotações
 // Lombok
@@ -37,9 +39,10 @@ public class Usuario {
     // Muitos usuários para um tipo usuário
     // FetchType - Carrega os dados juntos
     // optional - Se é obrigatório ou não
+    @OnDelete(action= OnDeleteAction.CASCADE)
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     // Avisar para o java, qual coluna da tabela tipu_suário vou relacionar
-    @JoinColumn(name = "tipo_usuario_id")
+    @JoinColumn(name = "id_tipo_usuario")
     private TipoUsuario tipoUsuario;
 
 

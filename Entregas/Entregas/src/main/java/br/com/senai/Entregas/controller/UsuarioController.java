@@ -2,6 +2,7 @@ package br.com.senai.Entregas.controller;
 
 
 import br.com.senai.Entregas.model.Usuario;
+import br.com.senai.Entregas.model.Veiculo;
 import br.com.senai.Entregas.service.UsuarioService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,14 +10,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-
 @RestController
 @RequestMapping("/api/usuarios")
 public class UsuarioController {
-    // criando constante para armazenar o service
     private final UsuarioService usuarioService;
 
-    // Criando construtor para injeção de dependência
     public UsuarioController(UsuarioService usuarioService){
         this.usuarioService = usuarioService;
     }
@@ -33,19 +31,41 @@ public class UsuarioController {
     // READ
     // Método para listar todos os usuários
     @GetMapping
-    public ResponseEntity<List<Usuario>> listarUsuarios(){
+    public ResponseEntity<List<Usuario>> listarTodosUsuarios(){
         List<Usuario> usuarios = usuarioService.listarTodos();
-        return ResponseEntity.ok().body(usuarios);
+        return ResponseEntity.ok(usuarios);
     }
 
-    // Método para mostrar usuário por id
+    // Método para buscar por id
     @GetMapping("/{id}")
-    public ResponseEntity<Usuario> buscarUsuarioPorId(@PathVariable Integer id){
-        Usuario usuario = usuarioService.buscarPorId(id);
-        if(usuario == null){
+    public ResponseEntity<Usuario> buscarPorId(@PathVariable Integer id){
+        Usuario usuarioBuscado = usuarioService.buscarPorId(id);
+        if(usuarioBuscado == null){
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(usuario);
+        return ResponseEntity.ok(usuarioBuscado);
+    }
+
+    // UPDATE
+    // Método para atualizar usuário
+    @PutMapping("/{id}")
+    public ResponseEntity<Usuario> atualizarUsuario(@PathVariable Integer id, @RequestBody Usuario usuario){
+        Usuario usuarioAtualizado = usuarioService.atualizarUsuario(id, usuario);
+        if(usuarioAtualizado == null){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(usuarioAtualizado);
+    }
+
+    // DELETE
+    // Método para deletar veículo por id
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deletarUsuario(@PathVariable Integer id){
+        Usuario usuarioDeletado = usuarioService.deletarUsuario(id);
+        if(usuarioDeletado == null){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.noContent().build();
     }
 
 }
