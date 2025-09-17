@@ -57,5 +57,16 @@ public class VeiculoController {
 
     }
 
+    // DELETE
+    // Método para deletar veículo por id
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deletarVeiculo(@PathVariable Integer id){
+        Veiculo veiculoDeletado = veiculoService.deletarVeiculo(id);
+        if(veiculoDeletado == null){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.noContent().build();
+    }
+
     
 }

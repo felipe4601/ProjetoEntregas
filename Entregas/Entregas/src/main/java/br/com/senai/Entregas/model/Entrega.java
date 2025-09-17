@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.time.OffsetDateTime;
 
@@ -22,10 +24,12 @@ public class Entrega {
     @Column(name="id_entrega")
     private Integer idEntrega;
 
+    @OnDelete(action= OnDeleteAction.CASCADE)
     @ManyToOne(fetch=FetchType.EAGER, optional = false)
     @JoinColumn(name="id_usuario")
     private Usuario usuario;
 
+    @OnDelete(action= OnDeleteAction.CASCADE)
     @ManyToOne(fetch=FetchType.EAGER, optional = false)
     @JoinColumn(name="id_endereco")
     private Endereco endereco;

@@ -50,4 +50,12 @@ public class VeiculoService {
 
     // DELETE
     // Método para deletar por id
+    public Veiculo deletarVeiculo(Integer id){
+        Veiculo veiculoDeletado = buscarPorId(id);
+        if(veiculoDeletado == null){
+            return null;
+        }
+        veiculoRepository.delete(veiculoDeletado);
+        return veiculoDeletado;
+    }
 }

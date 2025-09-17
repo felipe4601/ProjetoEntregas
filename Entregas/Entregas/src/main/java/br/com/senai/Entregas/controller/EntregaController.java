@@ -57,4 +57,15 @@ public class EntregaController {
         }
         return ResponseEntity.ok(entregaAtualizada);
     }
+
+    // DELETE
+    // Método para deletar entrega
+    @DeleteMapping("{id}")
+    public ResponseEntity<?> deletarEntrega(@PathVariable Integer id){
+        Entrega entregaDeletada = entregaService.deletarEntrega(id);
+        if(entregaDeletada == null){
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.notFound().build();
+    }
 }

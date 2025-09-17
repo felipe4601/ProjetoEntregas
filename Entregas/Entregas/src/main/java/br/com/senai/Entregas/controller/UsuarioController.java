@@ -2,6 +2,7 @@ package br.com.senai.Entregas.controller;
 
 
 import br.com.senai.Entregas.model.Usuario;
+import br.com.senai.Entregas.model.Veiculo;
 import br.com.senai.Entregas.service.UsuarioService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -47,13 +48,24 @@ public class UsuarioController {
 
     // UPDATE
     // Método para atualizar usuário
-    @PostMapping("/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<Usuario> atualizarUsuario(@PathVariable Integer id, @RequestBody Usuario usuario){
         Usuario usuarioAtualizado = usuarioService.atualizarUsuario(id, usuario);
         if(usuarioAtualizado == null){
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(usuarioAtualizado);
+    }
+
+    // DELETE
+    // Método para deletar veículo por id
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deletarUsuario(@PathVariable Integer id){
+        Usuario usuarioDeletado = usuarioService.deletarUsuario(id);
+        if(usuarioDeletado == null){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.noContent().build();
     }
 
 }

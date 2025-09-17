@@ -2,6 +2,7 @@ package br.com.senai.Entregas.service;
 
 
 import br.com.senai.Entregas.model.Usuario;
+import br.com.senai.Entregas.model.Veiculo;
 import br.com.senai.Entregas.repository.UsuarioRepository;
 import org.springframework.stereotype.Service;
 
@@ -50,6 +51,17 @@ public class UsuarioService {
         usuarioExistente.setNome(usuario.getSenha());
         usuarioExistente.setTipoUsuario(usuario.getTipoUsuario());
         return usuarioRepository.save(usuarioExistente);
+    }
+
+    // DELETE
+    // Método para deletar por id
+    public Usuario deletarUsuario(Integer id){
+        Usuario usuarioDeletado = buscarPorId(id);
+        if(usuarioDeletado == null){
+            return null;
+        }
+        usuarioRepository.delete(usuarioDeletado);
+        return usuarioDeletado;
     }
 
 }

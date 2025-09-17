@@ -6,6 +6,7 @@ import java.util.Optional;
 import br.com.senai.Entregas.model.Endereco;
 import br.com.senai.Entregas.repository.EnderecoRepository;
 
+import jakarta.persistence.criteria.CriteriaBuilder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -51,6 +52,17 @@ public class EnderecoService {
         enderecoExistente.setUsuario(endereco.getUsuario());
 
         return enderecoRepository.save(enderecoExistente);
+    }
+
+    // DELETE
+    // Método para deletar endereco
+    public Endereco deletarEndereco(Integer id){
+        Endereco enderecoDeletado = buscarPorId(id);
+        if(enderecoDeletado == null){
+            return null;
+        }
+        enderecoRepository.delete(enderecoDeletado);
+        return enderecoDeletado;
     }
     
 }

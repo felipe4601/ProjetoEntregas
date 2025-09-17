@@ -55,4 +55,15 @@ public class TipoUsuarioController {
         }
         return ResponseEntity.ok(tipoUsuarioAtualizado);
     }
+
+    // DELETE
+    // Método para deletar tipo de usuário por id
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deletarTipoUsuario(@PathVariable Integer id){
+        TipoUsuario tipoUsuarioDeletado = tipoUsuarioService.deletarTipoUsuario(id);
+        if(tipoUsuarioDeletado == null){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.noContent().build();
+    }
 }

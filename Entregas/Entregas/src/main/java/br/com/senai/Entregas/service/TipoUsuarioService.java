@@ -49,5 +49,15 @@ public class TipoUsuarioService {
 
         return tipoUsuarioRepository.save(tipoUsuarioExistente);
     }
+    // DELETE
+    // Método para deletar tipo de usuário
+    public TipoUsuario deletarTipoUsuario(Integer id){
+        TipoUsuario tipoUsuarioDeletado = buscarPorId(id);
+        if(tipoUsuarioDeletado == null){
+            return null;
+        }
+        tipoUsuarioRepository.delete(tipoUsuarioDeletado);
+        return tipoUsuarioDeletado;
+    }
     
 }

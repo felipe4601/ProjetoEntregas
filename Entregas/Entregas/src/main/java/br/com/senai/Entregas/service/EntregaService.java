@@ -52,4 +52,15 @@ public class EntregaService {
 
         return entregaRepository.save(entregaExistente);
     }
+
+    // DELETE
+    // Método para deletar entrega
+    public Entrega deletarEntrega(Integer id){
+        Entrega entregaDeletada = buscarPorId(id);
+        if(entregaDeletada == null){
+            return null;
+        }
+        entregaRepository.delete(entregaDeletada);
+        return entregaDeletada;
+    }
 }

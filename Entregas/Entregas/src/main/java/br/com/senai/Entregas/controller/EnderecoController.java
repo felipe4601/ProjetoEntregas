@@ -56,4 +56,15 @@ public class EnderecoController {
         }
         return ResponseEntity.ok(enderecoAtualizado);
     }
+
+    // DELETE
+    // Método para deletar endereço de entrega
+    @DeleteMapping
+    public ResponseEntity<?> deletarEndereco(@PathVariable Integer id){
+        Endereco enderecoDeletado = enderecoService.deletarEndereco(id);
+        if(enderecoDeletado == null){
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.notFound().build();
+    }
 }
