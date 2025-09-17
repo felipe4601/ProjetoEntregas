@@ -39,7 +39,7 @@ public class Usuario {
     // optional - Se é obrigatório ou não
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     // Avisar para o java, qual coluna da tabela tipu_suário vou relacionar
-    @JoinColumn(name = "tipo_usuario_id")
+    @JoinColumn(name = "id_tipo_usuario")
     private TipoUsuario tipoUsuario;
 
 

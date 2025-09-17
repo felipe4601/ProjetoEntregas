@@ -27,11 +27,11 @@ public class Veiculo {
     @JoinColumn(name = "id_usuario")
     private Usuario usuario;
 
-    @Column(name = "placa", nullable=false, columnDefinition="TEXT")
+    @Column(name = "placa", nullable=false, columnDefinition="TEXT", unique = true)
     private String placa;
 
     @Column(name = "modelo", nullable=false, columnDefinition="TEXT")
-    private String moddelo;
+    private String modelo;
 
     @Column(name = "tipo", nullable=false, columnDefinition="TEXT")
     private String tipo;

@@ -22,11 +22,11 @@ public class Entrega {
     @Column(name="id_entrega")
     private Integer idEntrega;
 
-    @ManyToOne(fetch=FetchType.EAGER)
+    @ManyToOne(fetch=FetchType.EAGER, optional = false)
     @JoinColumn(name="id_usuario")
     private Usuario usuario;
 
-    @ManyToOne(fetch=FetchType.EAGER)
+    @ManyToOne(fetch=FetchType.EAGER, optional = false)
     @JoinColumn(name="id_endereco")
     private Endereco endereco;
 
