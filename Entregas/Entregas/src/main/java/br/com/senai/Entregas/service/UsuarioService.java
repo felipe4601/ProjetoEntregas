@@ -4,6 +4,7 @@ package br.com.senai.Entregas.service;
 import br.com.senai.Entregas.model.Usuario;
 import br.com.senai.Entregas.model.Veiculo;
 import br.com.senai.Entregas.repository.UsuarioRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,15 +14,20 @@ import java.util.Optional;
 public class UsuarioService {
 
     private final UsuarioRepository usuarioRepository;
-
-    public UsuarioService(UsuarioRepository usuarioRepository){
+    private final PasswordEncoder passwordEncoder;
+    public UsuarioService(UsuarioRepository usuarioRepository,  PasswordEncoder passwordEncoder) {
         this.usuarioRepository = usuarioRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     // CRUD
     // CREATE
     // Método para cadastrar usuário
     public Usuario cadastrarUsuario(Usuario usuario){
+        // aqui nós pegamos a senha e fazemos o hashing
+        String senhaCriptografada = passwordEncoder.encode(usuario.getSenha());
+        // substiuimos a senha real pela criptografada
+        usuario.setSenha(senhaCriptografada);
         usuarioRepository.save(usuario);
         return usuario;
     }
